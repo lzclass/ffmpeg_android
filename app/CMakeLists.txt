@@ -1,7 +1,12 @@
+#设置cmake最低版本
 cmake_minimum_required(VERSION 3.4.1)
+
 add_library(
+#设置生成so文件名
              native-lib
+             #设置库的类型，一种是静态的STATIC .a文件，一种是动态SHARED so文件
              SHARED
+             #要编译的C/C++文件，我这里编译的是两个文件
              src/main/cpp/native-lib.cpp )
 find_library(
               log-lib
@@ -10,7 +15,7 @@ find_library(
 
 #声明导入文件更目录变量ARM_DIR ,这使用了相对与系统的更目录，因为使用相对路径似乎不起作用
 #Users/wangyijin/Desktop/demo/FFmpegForAndroidDemo/app/
-set(ARM_DIR D:/AndroidProject/ffmpeg_android/app/src/main/jniLibs)
+set(ARM_DIR D:/AndroidProjects/ffmpeg_android/app/src/main/jniLibs)
 
 
 #导入头文件
@@ -69,7 +74,7 @@ set_target_properties(avfilter-6
                         PROPERTIES IMPORTED_LOCATION
                         ${ARM_DIR}/armeabi/libavfilter-6.so)
 
-
+#指定连接的目标库
 target_link_libraries(
                        native-lib
                        avcodec-57
